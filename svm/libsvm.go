@@ -4,7 +4,6 @@ import (
 	"base/files"
 	"bufio"
 	"bytes"
-	"fmt"
 	"io"
 	"log"
 	"math"
@@ -94,9 +93,6 @@ func idf(lemma int, docs []*DocTraning) float64 {
 		if _, ok := doc.lemmas[lemma]; ok {
 			count++
 		}
-	}
-	if count == 0 {
-		fmt.Print(lemma, ",")
 	}
 	return math.Log((float64(len(docs)) + 0.01) / (count + 0.01))
 }
