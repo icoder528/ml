@@ -1,7 +1,6 @@
 package svm
 
 import (
-	"base/files"
 	"bufio"
 	"bytes"
 	"io"
@@ -228,13 +227,13 @@ func LibSvmClassifier(labelFile, featureFile, trainFile, modelFile string) (Clas
 	var (
 		classes, features []string
 	)
-	files.ProceedLine(labelFile, func(line []byte) {
+	utils.ProceedLine(labelFile, nil, func(line []byte) {
 		items := bytes.Split(line, []byte(":"))
 		if len(items) == 2 {
 			classes = append(classes, string(bytes.TrimSpace(items[0])))
 		}
 	})
-	files.ProceedLine(featureFile, func(line []byte) {
+	utils.ProceedLine(featureFile, nil, func(line []byte) {
 		feature := bytes.TrimSpace(line)
 		if len(feature) != 0 {
 			features = append(features, string(feature))
